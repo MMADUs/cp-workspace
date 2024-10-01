@@ -21,6 +21,11 @@ const char** getStringArr(const char* strArr[]) {
     return strArr;
 }
 
+struct MyStruct {
+    int a;
+    char b;
+};
+
 int main() {
     // Return string and print
     const char* str = getString("hi");
@@ -60,9 +65,39 @@ int main() {
             }
         }
     }
+    int unique = 0;
+    for (int i = 1; i < len; i++) {
+        if (intArr[i] != intArr[unique]) {
+            unique++;
+            intArr[unique] = intArr[i];
+        }
+    }
+    for (int i = unique + 1; i < len; i++) {
+        intArr[i] = 0;
+    }
     for (int i = 0; i < len; i++) {
         printf("%d\n", intArr[i]);
     }
+
+    // int a, b;
+    //
+    // a = 11;
+    // b = 10;
+    //
+    // int plus = a + b;
+    // printf("hasil penjumlahan: %d\n", plus);
+    // int minus = a - b;
+    // printf("hasil pengurangan: %d\n", minus);
+    // int times = a * b;
+    // printf("hasil perkalian: %d\n", times);
+    // int divide = a / b;
+    // printf("hasil pembagian: %d\n", divide);
+    // int modulo = a % b;
+    // printf("hasil modulo: %d\n", modulo);
+    // int increment = a++;
+    // printf("hasil increment: %d\n", increment);
+    // int decrement = --a;
+    // printf("hasil decrement: %d\n", decrement);
 
     printf("program finished");
     return 0;
