@@ -1,19 +1,24 @@
 #include <stdio.h>
 
 int main() {
-    int a;
-    scanf("%d", &a);
-    for (int i = 1; i <= a; i++) {
-        long long int b, c;
-        scanf("%lld %lld", &b, &c);
-        int res = 0;
-        for (int j = 1; j <= b; j++) {
-            int d;
-            scanf("%d", &d);
-            if (c > d) {
-                res = c;
+    int total;
+    scanf("%d", &total);
+    for (int i = 0; i < total; i++) {
+        int kinds;
+        long long int money;
+        scanf("%d %lld", &kinds, &money);
+        int price[kinds];
+        for (int j = 0; j < kinds; j++) {
+            scanf("%d", &price[j]);
+        }
+        int cheapest = price[0];
+        for (int j = 0; j < kinds; j++) {
+            if (price[j] < cheapest) {
+                cheapest = price[j];
             }
         }
-        printf("Case #%d: %d\n", i, res);
+        int buy = money / cheapest;
+        printf("Case #%d: %d\n", i + 1, buy);
     }
+    return 0;
 }
