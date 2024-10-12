@@ -158,3 +158,57 @@ add_executable(jojo-and-arithmetic-progression jojo-and-arithmetic-progression.c
 
 # Add executable for learning-binary.c
 add_executable(learning-binary learning-binary.c)
+
+# Add executable for three-patterns.c
+add_executable(three-patterns three-patterns.c)
+
+# Add executable for zoo.c
+add_executable(zoo zoo.c)
+
+# Add executable for square.c
+add_executable(square square.c)
+
+# Add executable for jolibi.c
+add_executable(jolibi jolibi.c)
+
+# Add executable for items.c
+add_executable(items items.c)
+
+# Add executable for free-food.c
+add_executable(free-food free-food.c)
+
+# Add executable for thai-tea.c
+add_executable(thai-tea thai-tea.c)
+
+# Add executable for frogger-race.c
+add_executable(frogger-race frogger-race.c)
+
+# Add executable for baloons.c
+add_executable(baloons baloons.c)
+
+# Add executable for clarify.c
+add_executable(clarify clarify.c)
+
+# Add executable for games.c
+add_executable(games games.c)
+
+# Add executable for odd-and-even.c
+add_executable(odd-and-even odd-and-even.c)
+
+# Add executable for enough-okay-perfect.c
+add_executable(enough-okay-perfect enough-okay-perfect.c)
+
+# Add executable for playing-monopoly.c
+add_executable(playing-monopoly playing-monopoly.c)
+
+# Add executable for photo.c
+add_executable(photo photo.c)
+
+# Add executable for weird-shape.c
+add_executable(weird-shape weird-shape.c)
+
+# Add executable for triangle.c
+add_executable(triangle triangle.c)
+
+# Add executable for idontwannabeyouanymore.c
+add_executable(idontwannabeyouanymore idontwannabeyouanymore.c)
