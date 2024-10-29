@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 int main(){
-    int x, frequency[1000 + 1] = {0};
-    scanf("%d", &x);
-    int numarr[x];
-    for (int i = 0; i < x; i++) {
-        scanf("%d", &numarr[i]);
-        frequency[numarr[i]]++;
+    int len, frequency[1000+1] = {0};
+    scanf("%d", &len);
+    int nums[len];
+    for (int i = 0; i < len; i++) {
+        scanf("%d", &nums[i]);
+        frequency[nums[i]]++;
     }
     int max = 0;
     for (int i = 0; i < 1000 + 1; i++) {

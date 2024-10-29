@@ -1,30 +1,39 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(){
-    int tc;
-    scanf("%d", &tc);
-    for (int i = 0; i < tc; i++) {
-        char str[11 + 1];
-        scanf("%s", str);
-        printf("Case #%d: ",i+1);
-        int count = 0;
-        const int length = strlen(str);
-        if (str[0] == '.' || str[length-1] == '.') {
-            printf("NO\n");
-        }
-        for (int j = 0; j < length; j++) {
-            if (str[i] == '.' ) {
-                count++;
-                if (str[i+1] == '.') {
-                    printf("NO\n");
-                }
+int isValidIPv10(char *ip) {
+    int dotCount = 0;
+    int numCount = 0;
+    int length = strlen(ip);
+    for (int i = 0; i < length; i++) {
+        if (ip[i] == '.') {
+            if (numCount == 0) {
+                return 0;
             }
-        }
-        if (count == 5) {
-            printf("YES\n");
+            dotCount++;
+            numCount = 0;
+        } else if (ip[i] >= '0' && ip[i] <= '9') {
+            numCount++;
         } else {
-            printf("NO\n");
+            return 0;
+        }
+    }
+    if (numCount == 0) {
+        return 0;
+    }
+    return (dotCount == 5);
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    for (int t = 1; t <= T; t++) {
+        char ip[100+1];
+        scanf("%s", ip);
+        if (isValidIPv10(ip)) {
+            printf("Case #%d: YES\n", t);
+        } else {
+            printf("Case #%d: NO\n", t);
         }
     }
     return 0;

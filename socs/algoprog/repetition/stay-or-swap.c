@@ -1,27 +1,20 @@
 #include <stdio.h>
 
-int main() {
-    int iter;
-    scanf("%d", &iter);
-    for (int i = 0; i < iter; i++) {
-        int plates;
-        int capacity;
-        int initial;
-        scanf("%d %d %d", &plates, &capacity, &initial);
-        int portions[plates];
-        for (int j = 0; j < plates; j++) {
-            scanf("%d", &portions[i]);
-        }
-        int result = initial;
-        if (result > capacity) {
-            result = 0;
-        }
-        for (int j = 0; j < plates; j++) {
-            if (portions[j] > result && portions[j] < capacity) {
-                result = portions[j];
+int main(){
+    int T;
+    scanf("%d", &T);
+    for (int i = 1; i <= T; i++){
+        int N, M, K;
+        scanf("%d %d %d", &N, &M, &K);
+        int largest_portion = K;
+        for (int j = 0; j < N; j++){
+            int portion;
+            scanf("%d", &portion);
+            if (portion <= M && portion > largest_portion){
+                largest_portion = portion;
             }
         }
-        printf("Case #%d: %d\n", i + 1, result);
+        printf("Case #%d: %d\n", i, largest_portion);
     }
     return 0;
 }

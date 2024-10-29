@@ -11,8 +11,11 @@ int main(){
         scanf("%s", letter);
         printf("Case #%d: ", i+1);
         for (int i = 0; i < n; i++) {
-            int ascii = ((letter[i] - 97 + k) % 26) + 97;
-            printf("%c", ascii);
+            int ascii = letter[i] - 97 + k;
+            while (ascii > 25) {
+                ascii -= 26;
+            }
+            printf("%c", ascii + 97);
         }
         printf("\n");
     }

@@ -4,10 +4,10 @@ int main(){
     int roll;
     scanf("%d", &roll);
     int position = 0;
-    int temp;
     for (int i = 0; i < roll; i++) {
-        scanf("%d", &temp);
-        position += temp;
+        int num;
+        scanf("%d", &num);
+        position += num;
         switch (position) {
             case 9:
                 position = 21;
@@ -32,6 +32,5 @@ int main(){
         }
     }
     printf("%d\n", position);
-
     return 0;
 }

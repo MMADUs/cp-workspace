@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-// Function to calculate gcd of two numbers
 long long gcd(long long a, long long b) {
     while (b) {
         long long t = b;
@@ -10,27 +9,22 @@ long long gcd(long long a, long long b) {
     return a;
 }
 
-// Function to calculate lcm of two numbers
 long long lcm(long long a, long long b) {
     return a / gcd(a, b) * b;
 }
 
-// Function to calculate the number of multiples
 long long count_multiples(long long N, long long x) {
     return N / x;
 }
 
 int main() {
     int T;
-    scanf("%d", &T);  // Read number of test cases
-
+    scanf("%d", &T);
     for (int i = 0; i < T; i++) {
         long long N, A, B, C, D;
         scanf("%lld %lld %lld %lld %lld", &N, &A, &B, &C, &D);
-
         long long count = 0;
 
-        // Inclusion-Exclusion principle
         count += count_multiples(N, A);
         count += count_multiples(N, B);
         count += count_multiples(N, C);
@@ -52,6 +46,5 @@ int main() {
 
         printf("Case #%d: %lld\n", i+1, count);
     }
-
     return 0;
 }

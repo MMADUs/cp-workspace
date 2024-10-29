@@ -1,25 +1,32 @@
 #include <stdio.h>
 
 int main() {
-    int total;
-    scanf("%d", &total);
-    for (int i = 0; i < total; i++) {
-        long long int len;
-        scanf("%lld", &len);
-        int nums[len];
-        for (int j = 0; j < len; j++) {
-            scanf("%d", &nums[j]);
+    int tc;
+    scanf("%d", &tc);
+    for (int i = 0; i < tc; i++) {
+        int N;
+        scanf("%d", &N);
+        int arr[N];
+        int total_sum = 0;
+        for (int j = 0; j < N; j++) {
+            scanf("%d", &arr[j]);
+            total_sum += arr[j];
         }
-        const int split = len / 2;
-        int left = 0;
-        int right = 0;
-        for (int j = 0; j < split; j++) {
-            left += nums[j];
+        if (total_sum % 2 != 0) {
+            printf("Case #%d: No\n", i + 1);
+            continue;
         }
-        for (int j = split; j < len; j++) {
-            right += nums[j];
+        int left_sum = 0;
+        int half_sum = total_sum / 2;
+        int possible = 0;
+        for (int j = 0; j < N; j++) {
+            left_sum += arr[j];
+            if (left_sum == half_sum) {
+                possible = 1;
+                break;
+            }
         }
-        if (left == right) {
+        if (possible) {
             printf("Case #%d: Yes\n", i + 1);
         } else {
             printf("Case #%d: No\n", i + 1);

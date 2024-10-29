@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 int main() {
-    int start, jump;
-    scanf("%d %d", &start, &jump);
-    for (int i = start; i <= start + jump; i++) {
+    int start, end;
+    scanf("%d %d", &start, &end);
+    for (int i = start; i <= start + end; i++) {
         printf("%d\n", i);
     }
     return 0;

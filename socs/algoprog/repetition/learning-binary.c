@@ -1,19 +1,13 @@
 #include <stdio.h>
 
-int func(int x, int n){
-
-}
-
-
-int main(){
-    int tc,x,n;
-    scanf("%d", &tc);
-    for (int i = 0; i < tc; i++)
-    {
-        scanf("%d %d", &x,&n);
-        printf("%d", func(x,n));
+int main() {
+    int T;
+    int X, P;
+    scanf("%d", &T);
+    for (int i = 0; i < T; i++) {
+        scanf("%d %d", &X, &P);
+        int bit_value = (X >> P) & 1;
+        printf("%d\n", bit_value);
     }
-
-
     return 0;
 }

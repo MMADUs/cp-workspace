@@ -1,22 +1,24 @@
 #include <stdio.h>
 
 int main() {
-    long long int T;
-    scanf("%lld", &T);
-    for (int t = 1; t <= T; t++) {
-        long long int N, X;
-        scanf("%lld %lld", &N, &X);
-        if (X == N) {
-            printf("Case #%d: 0\n", t);
-            continue;
+    int tc;
+    scanf("%d", &tc);
+    for (int i = 0; i < tc; i++) {
+        int total, target;
+        scanf("%d %d", &total, &target);
+        int min;
+        if (total == target || target == 1) {
+            min = 0;
+        } else if (target % 2 == 0) {
+            int front = target / 2;
+            int back = (total - target) / 2;
+            min = (front > back) ? back : front;
+        } else {
+            int front = (target - 1) / 2;
+            int back = (total - target + 1) / 2;
+            min = (front > back) ? back : front;
         }
-        int flips_from_front = X / 2;
-        int flips_from_back = (N / 2) - (X / 2);
-        if (N % 2 == 1 && X % 2 == 1) {
-            flips_from_back += 1;
-        }
-        int min_flips = flips_from_front < flips_from_back ? flips_from_front : flips_from_back;
-        printf("Case #%d: %d\n", t, min_flips);
+        printf("Case #%d: %d\n", i + 1, min);
     }
     return 0;
 }

@@ -7,15 +7,15 @@ int main() {
     for (int i = 0; i < len; i++) {
         scanf("%d", &nums[i]);
     }
-   for (int i = 0; i < len; i++) {
-       if (i == len - 1 || nums[i + 1] <= nums[i]) {
-           printf("%d", nums[i]);
-           if (i != len - 1) {
-               printf(" ");
-           } else {
-               printf("\n");
-           }
-       }
-   }
+    for (int i = 0; i < len; i++) {
+        if (nums[i] >= nums[i + 1] || i == len - 1) {
+            printf("%d", nums[i]);
+            if (i != len - 1) {
+                printf(" ");
+            } else {
+                printf("\n");
+            }
+        }
+    }
     return 0;
 }
