@@ -6,7 +6,6 @@ int main() {
     for (int i = 1; i <= a; i++) {
         int frog1, frog2;
         scanf("%d %d", &frog1, &frog2);
-
         if (frog1 % 2 == 0 || frog2 % 2 == 0) {
             printf("Case #%d: Party time!\n", i);
         } else {

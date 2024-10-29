@@ -3,12 +3,11 @@
 int main() {
     long long int a, b, c;
     scanf("%lld %lld %lld", &a, &b, &c);
-
     if (a > b && a > c) {
         if (b > c) {
             printf("Daging\n");
             printf("Sayur\n");
-            printf("Sayur\n");
+            printf("Telur\n");
         } else {
             printf("Daging\n");
             printf("Telur\n");

@@ -55,4 +55,16 @@ add_executable(arithmetic-triplier arithmetic/triplier.c)
 add_executable(arithmetic-percentage arithmetic/percentage.c)
 add_executable(arithmetic-diamond-sum arithmetic/diamond-sum.c)
 
+# selection executable
+add_executable(selection-odd-even-number selection/odd-even-number.c)
+add_executable(selection-instant-ramen-life-hack selection/instant-ramen-life-hack.c)
+add_executable(selection-cashback selection/cashback.c)
+add_executable(selection-frog-party selection/frog-party.c)
+add_executable(selection-not-equal selection/not-equal.c)
+add_executable(selection-traditional-market selection/traditional-market.c)
+add_executable(selection-are-they-equal selection/are-they-equal.c)
+add_executable(selection-alphabetical-order selection/alphabetical-order.c)
+add_executable(selection-terms-and-condition-apply selection/terms-and-condition-apply.c)
+add_executable(selection-three-elevators selection/three-elevators.c)
+
 add_executable(repetition-late-night-counting repetition/late-night-counting.c)
