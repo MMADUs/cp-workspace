@@ -1,72 +1,60 @@
 #include <stdio.h>
 
-#define MAX_DIM 100
-
-void multiplyMatrix(int A[][MAX_DIM], int B[][MAX_DIM], int C[][MAX_DIM], int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            C[i][j] = 0;
-            for (int k = 0; k < n; k++) {
-                C[i][j] += A[i][k] * B[k][j];
+int multiply(int size, int *matrixA, int *matrixB, int *result) {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            for (int k = 0; k < size; k++) {
+                result[i * size + j] += matrixA[i * size + k] * matrixB[k * size + j];
             }
         }
     }
-}
-
-void copyMatrix(int src[][MAX_DIM], int dest[][MAX_DIM], int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            dest[i][j] = src[i][j];
-        }
-    }
-}
-
-void printMatrix(int matrix[][MAX_DIM], int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
+    return 0;
 }
 
 int main() {
-    int total, dimension;
-    int A[MAX_DIM][MAX_DIM], B[MAX_DIM][MAX_DIM], C[MAX_DIM][MAX_DIM], temp[MAX_DIM][MAX_DIM];
-
-    scanf("%d", &total);
-
-    for (int i = 0; i < total; i++) {
-        scanf("%d", &dimension);
-
-        // Read first matrix (A)
-        for (int k = 0; k < dimension; k++) {
-            for (int l = 0; l < dimension; l++) {
-                scanf("%d", &A[k][l]);
+    int tc;
+    scanf("%d", &tc);
+    for (int i = 0; i < tc; i++) {
+        int size;
+        scanf("%d", &size);
+        int firstResult[size][size];
+        int finalresult[size][size];
+        for(int j = 0; j < size; j++) {
+            for(int k = 0; k < size; k++) {
+                firstResult[j][k] = 0;
+                finalresult[j][k] = 0;
             }
         }
-
-        // Read second matrix (B) and multiply with A
-        for (int k = 0; k < dimension; k++) {
-            for (int l = 0; l < dimension; l++) {
-                scanf("%d", &B[k][l]);
+        int matrixA[size][size];
+        for (int j = 0; j < size; j++) {
+            for (int k = 0; k < size; k++) {
+                scanf("%d", &matrixA[j][k]);
             }
         }
-        multiplyMatrix(A, B, C, dimension);
-
-        // Read third matrix (temp) and multiply with previous result
-        for (int k = 0; k < dimension; k++) {
-            for (int l = 0; l < dimension; l++) {
-                scanf("%d", &temp[k][l]);
+        int matrixB[size][size];
+        for (int j = 0; j < size; j++) {
+            for (int k = 0; k < size; k++) {
+                scanf("%d", &matrixB[j][k]);
             }
         }
-        multiplyMatrix(C, temp, A, dimension);  // Reuse A to store final result
-
-        // Print the result
+        multiply(size, matrixA, matrixB, firstResult);
+        int matrixC[size][size];
+        for (int j = 0; j < size; j++) {
+            for (int k = 0; k < size; k++) {
+                scanf("%d", &matrixC[j][k]);
+            }
+        }
+        multiply(size, firstResult, matrixC, finalresult);
         printf("Case #%d:\n", i + 1);
-        printMatrix(A, dimension);
+        for (int j = 0; j < size; j++) {
+            for (int k = 0; k < size; k++) {
+                printf("%d", finalresult[j][k]);
+                if(k != size - 1) {
+                    printf(" ");
+                }
+            }
+            printf("\n");
+        }
     }
-
     return 0;
 }

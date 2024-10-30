@@ -2,9 +2,7 @@
 
 int main() {
     char input[100+1];
-
-    scanf("%100[^\n]", input); 
-
+    scanf("%[^\n]", input);
     printf("#include <stdio.h>\n");
     printf("int main()\n");
     printf("{\n");

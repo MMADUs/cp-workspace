@@ -1,25 +1,27 @@
 #include <stdio.h>
 
 int main() {
-    int dimension;
-    scanf("%d", &dimension);
-    int value[dimension][dimension];
-    // Input the y-dimension (rows)
-    for (int j = 0; j < dimension; j++) {
-        // Input the x-dimension (columns)
-        for (int k = 0; k < dimension; k++) {
-            scanf("%d", &value[j][k]);  // Store each value in the 2D array
-        }
+    int team;
+    scanf("%d", &team);
+    int allPeople[team][team];
+    int countTeam[team + 1];
+    for (int i = 1; i <= team; i++) {
+        countTeam[i] = 0;
     }
-    // validate
-    int spectator = 0;
-    for (int i = 0; i < dimension; i++) {
-        for (int j = 0; j < dimension; j++) {
-            if (value[i][j] == 0) {
-                spectator++;
+    for (int i = 0; i < team; i++) {
+        for (int j = 0; j < team; j++) {
+            scanf("%d", &allPeople[i][j]);
+            if (allPeople[i][j] != 0) {
+                countTeam[allPeople[i][j]]++;
             }
         }
     }
-    printf("%d\n", spectator);
+    int incompleteTeams = 0;
+    for (int i = 1; i <= team; i++) {
+        if (countTeam[i] < team) {
+            incompleteTeams++;
+        }
+    }
+    printf("%d\n", incompleteTeams);
     return 0;
 }

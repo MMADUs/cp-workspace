@@ -1,34 +1,29 @@
 #include <stdio.h>
 
 int main() {
-    int total;
-    scanf("%d", &total);
-    for (int i = 0; i < total; i++) {
-        int dimension;
-        scanf("%d", &dimension);
-        // Declare a 2D array for storing the values
-        long long int value[dimension][dimension];
-        // Input the y-dimension (rows)
-        for (int j = 0; j < dimension; j++) {
-            // Input the x-dimension (columns)
-            for (int k = 0; k < dimension; k++) {
-                scanf("%lld", &value[j][k]);  // Store each value in the 2D array
+    int tc;
+    scanf("%d", &tc);
+    for (int i = 0; i < tc; i++) {
+        int size;
+        scanf("%d", &size);
+        long long int nums[size][size];
+        for (int j = 0; j < size; j++) {
+            for (int k = 0; k < size; k++) {
+                scanf("%lld", &nums[j][k]);
             }
         }
-        // calculate
         printf("Case #%d: ", i + 1);
-        for (int x = 0; x < dimension; x++) {
+        for (int x = 0; x < size; x++) {
             int res = 0;
-            for (int y = 0; y < dimension; y++) {
-                res += value[y][x];
+            for (int y = 0; y < size; y++) {
+                res += nums[y][x];
             }
             printf("%d", res);
-            if (x!=dimension-1) {
+            if (x != size - 1) {
                 printf(" ");
             }
         }
         printf("\n");
     }
-
     return 0;
 }

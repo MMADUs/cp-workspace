@@ -10,7 +10,7 @@ int main() {
         printf("Case %d: ", i + 1);
         for (int j = 0; j < strlen(words); j++) {
             printf("%d", words[j]);
-            if (j < strlen(words) - 1) {
+            if (j != strlen(words) - 1) {
                 printf("-");
             }
         }
