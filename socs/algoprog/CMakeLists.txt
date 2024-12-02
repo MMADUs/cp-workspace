@@ -3,6 +3,9 @@ project(fundamental C)
 
 set(CMAKE_C_STANDARD 11)
 
+# aol executable
+add_executable(aol-csv-file aol/csv-file.c)
+
 # practice executable
 add_executable(practice-basic practice/basic.c)
 add_executable(practice-matrix practice/matrix.c)
