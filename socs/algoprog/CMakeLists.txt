@@ -11,6 +11,8 @@ add_executable(practice-basic practice/basic.c)
 add_executable(practice-matrix practice/matrix.c)
 add_executable(practice-star practice/star.c)
 add_executable(practice-strings practice/strings.c)
+add_executable(practice-bubble-sort practice/bubble-sort.c)
+add_executable(practice-selection-sort practice/selection-sort.c)
 
 # input output executable
 add_executable(input-output-helloworld input-output/helloworld.c)
