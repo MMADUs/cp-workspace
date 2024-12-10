@@ -13,6 +13,9 @@ add_executable(practice-star practice/star.c)
 add_executable(practice-strings practice/strings.c)
 add_executable(practice-bubble-sort practice/bubble-sort.c)
 add_executable(practice-selection-sort practice/selection-sort.c)
+add_executable(practice-merge-sort practice/merge-sort.c)
+add_executable(practice-linear-search practice/linear-search.c)
+add_executable(practice-binary-search practice/binary-search.c)
 
 # input output executable
 add_executable(input-output-helloworld input-output/helloworld.c)
@@ -159,3 +162,10 @@ add_executable(pointer-array-summer-vacation pointer-array/summer-vacation.c)
 add_executable(pointer-array-box-of-chocolate pointer-array/box-of-chocolate.c)
 add_executable(pointer-array-secret-code pointer-array/secret-code.c)
 add_executable(pointer-array-emergency-exit pointer-array/emergency-exit.c)
+
+# file executable
+add_executable(file-planting-tree file/planting-tree.c)
+add_executable(file-bad-prank file/bad-prank.c)
+add_executable(file-a-plus-b file/a-plus-b.c)
+add_executable(file-alphabet-converter file/alphabet-converter.c)
+add_executable(file-ice file/ice.c)
