@@ -30,7 +30,7 @@ void printChar(int counter[]){
 
 int main(){
     // open file
-    FILE *file = fopen("testdata.in","r");
+    FILE *file = fopen("../file/alphabet-converter.in","r");
     if (file == NULL) {
         printf("Error opening file\n");
         return 1;

@@ -16,6 +16,7 @@ add_executable(practice-selection-sort practice/selection-sort.c)
 add_executable(practice-merge-sort practice/merge-sort.c)
 add_executable(practice-linear-search practice/linear-search.c)
 add_executable(practice-binary-search practice/binary-search.c)
+add_executable(practice-test practice/test.c)
 
 # input output executable
 add_executable(input-output-helloworld input-output/helloworld.c)
@@ -169,3 +170,11 @@ add_executable(file-bad-prank file/bad-prank.c)
 add_executable(file-a-plus-b file/a-plus-b.c)
 add_executable(file-alphabet-converter file/alphabet-converter.c)
 add_executable(file-ice file/ice.c)
+
+# sorting executable
+add_executable(sorting-sorting sorting/sorting.c)
+add_executable(sorting-plant-sorting sorting/plant-sorting.c)
+add_executable(sorting-student-sorting sorting/student-sorting.c)
+add_executable(sorting-top-viewer sorting/top-viewer.c)
+add_executable(sorting-temperature sorting/temperature.c)
+add_executable(sorting-lili-and-deadlines sorting/lili-and-deadlines.c)
