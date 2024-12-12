@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define STR_SIZE 101
 
@@ -22,14 +23,24 @@ void Merge(struct Assignment arr[], const int left, const int mid, const int rig
     int leftIdx = 0;
     int rightIdx = 0;
     while (leftIdx < leftSize && rightIdx < rightSize) {
-        if (leftArr[leftIdx].deadline <= rightArr[rightIdx].deadline) {
+        if (leftArr[leftIdx].deadline < rightArr[rightIdx].deadline) {
             arr[idx] = leftArr[leftIdx];
             idx++;
             leftIdx++;
-        } else {
+        } else if(leftArr[leftIdx].deadline > rightArr[rightIdx].deadline) {
             arr[idx] = rightArr[rightIdx];
             idx++;
             rightIdx++;
+        } else {
+            if (strcmp(leftArr[leftIdx].subject, rightArr[rightIdx].subject) < 0) {
+                arr[idx] = leftArr[leftIdx];
+                idx++;
+                leftIdx++;
+            } else {
+                arr[idx] = rightArr[rightIdx];
+                idx++;
+                rightIdx++;
+            }
         }
     }
     while (leftIdx < leftSize) {
@@ -53,18 +64,6 @@ void Divide(struct Assignment arr[], const int left, const int right) {
     Divide(arr, mid + 1, right);
     Merge(arr, left, mid, right);
 }
-
-// void bubbleSort(struct Assignment assignment[], const int size) {
-//     for (int i = 0; i < size; i++) {
-//         for (int j = 0; j < size - 1; j++) {
-//             if (assignment[j].deadline > assignment[j + 1].deadline) {
-//                 const struct Assignment temp = assignment[j];
-//                 assignment[j] = assignment[j + 1];
-//                 assignment[j + 1] = temp;
-//             }
-//         }
-//     }
-// }
 
 int main() {
     int size;

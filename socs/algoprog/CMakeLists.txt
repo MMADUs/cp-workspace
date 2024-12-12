@@ -178,3 +178,10 @@ add_executable(sorting-student-sorting sorting/student-sorting.c)
 add_executable(sorting-top-viewer sorting/top-viewer.c)
 add_executable(sorting-temperature sorting/temperature.c)
 add_executable(sorting-lili-and-deadlines sorting/lili-and-deadlines.c)
+add_executable(sorting-christmas-train sorting/christmas-train.c)
+add_executable(sorting-grid-of-letters sorting/grid-of-letters.c)
+add_executable(sorting-2-rows-theatre sorting/2-rows-theatre.c)
+add_executable(sorting-i-love-statistics sorting/i-love-statistics.c)
+
+# searching executable
+add_executable(searching-file searching/file.c)
