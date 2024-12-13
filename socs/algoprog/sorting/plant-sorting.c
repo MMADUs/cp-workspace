@@ -8,7 +8,7 @@ struct Plant {
     long long int number;
 };
 
-void MergeStr(struct Plant arr[], const int left, const int mid, const int right) {
+void Merge(struct Plant arr[], const int left, const int mid, const int right) {
     const int leftSize = mid - left + 1;
     const int rightSize = right - mid;
     struct Plant leftArr[leftSize];
@@ -52,7 +52,7 @@ void Divide(struct Plant arr[], const int left, const int right) {
     const int mid = (left+right)/2;
     Divide(arr, left, mid);
     Divide(arr, mid + 1, right);
-    MergeStr(arr, left, mid, right);
+    Merge(arr, left, mid, right);
 }
 
 int main() {
