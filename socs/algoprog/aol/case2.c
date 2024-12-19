@@ -1,3 +1,14 @@
+/**
+* Copyright (c) 2024-2025 Muhammad Nizwa.
+* AOL Algorithm & Programming
+* Class LM01
+* NIM 2802401833
+*
+* ------
+* CASE 2
+* ------
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -287,6 +298,7 @@ int sort() {
     return 0;
 }
 
+// export write file
 int export() {
     // input file metadata
     char filename[FILENAME_SIZE];
@@ -316,8 +328,22 @@ int export() {
     return 0;
 }
 
+void by_nizwa() {
+    printf("\n");
+    printf("\n");
+    printf("  NNN    NN   NNNN   NNNNNNN   NN      NN    NNNNN    \n");
+    printf("  NNNN   NN    NN        NNN   NN      NN   NN   NN   \n");
+    printf("  NN NN  NN    NN       NN     NN  NN  NN   NNNNNNN   \n");
+    printf("  NN  NN NN    NN     NNN      NN  NN  NN   NN   NN   \n");
+    printf("  NN   NNNN   NNNN   NNNNNNN    NN NN NN    NN   NN   \n");
+    printf("\n");
+    printf("\n");
+}
+
+// main entry
 int main() {
     int choice;
+    by_nizwa();
     do {
         // display menu
         printf("What do you want to do?\n");

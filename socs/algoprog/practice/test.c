@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+
 #define SIZE 10
 
 void Merge(long long int arr[], int left, int mid, int right) {
@@ -49,13 +51,19 @@ void Divide(long long int arr[], int left, int right) {
 }
 
 int main() {
-    long long int arr[SIZE] = {5, 17, 6, 20, 14, 16, 0, 24, 9, 11};
-    // 0 5 6 9 11 14 16 17 20 24
-
-    Divide(arr, 0, SIZE-1);
-    // print hasil
-    for (int i = 0; i < SIZE; i++) {
-        printf("%lld ", arr[i]);
-    }
+    // long long int arr[SIZE] = {5, 17, 6, 20, 14, 16, 0, 24, 9, 11};
+    // // 0 5 6 9 11 14 16 17 20 24
+    //
+    // Divide(arr, 0, SIZE-1);
+    // // print hasil
+    // for (int i = 0; i < SIZE; i++) {
+    //     printf("%lld ", arr[i]);
+    // }
+    char test1[3];
+    strcpy(test1, "hi");
+    char test2[3];
+    strcpy(test2, "hi");
+    int cmp = strcmp(test1, test2);
+    printf("%d\n", cmp);
     return 0;
 }
