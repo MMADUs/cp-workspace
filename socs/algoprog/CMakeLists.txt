@@ -165,6 +165,21 @@ add_executable(pointer-array-box-of-chocolate pointer-array/box-of-chocolate.c)
 add_executable(pointer-array-secret-code pointer-array/secret-code.c)
 add_executable(pointer-array-emergency-exit pointer-array/emergency-exit.c)
 
+# recursion executable
+add_executable(recursion-a-to-b recursion/a-to-b.c)
+add_executable(recursion-odd-jobonacci recursion/odd-jobonacci.c)
+add_executable(recursion-jojonanci recursion/jojonanci.c)
+add_executable(recursion-a-man-a-plan-a-canal-panama recursion/a-man-a-plan-a-canal-panama.c)
+add_executable(recursion-ackerman-function recursion/ackerman-function.c)
+add_executable(recursion-eltit-a-si-sihT recursion/eltit-a-si-sihT.c)
+add_executable(recursion-epic-game recursion/epic-game.c)
+add_executable(recursion-fibo-count recursion/fibo-count.c)
+add_executable(recursion-fibo-string recursion/fibo-string.c)
+add_executable(recursion-not-fibonacci recursion/not-fibonacci.c)
+add_executable(recursion-recursion recursion/recursion.c)
+add_executable(recursion-team-trees recursion/team-trees.c)
+add_executable(recursion-till-one recursion/till-one.c)
+
 # file executable
 add_executable(file-planting-tree file/planting-tree.c)
 add_executable(file-bad-prank file/bad-prank.c)
