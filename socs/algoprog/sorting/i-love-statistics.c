@@ -56,18 +56,28 @@ int main() {
         for (int j = 0; j < size; j++) {
             scanf("%lld", &arr[j]);
         }
-        const int median_index = size / 2;
+        // sort
         Divide(arr, 0, size - 1);
-        const double median = arr[median_index];
-        long long int sum = 0;
+        // 1 2 3 4 5 6
+        double mean = 0;
         for (int j = 0; j < size; j++) {
-            sum += arr[j];
+            mean += arr[j];
         }
-        const double mean = sum / size;
-        printf("Case #%d:\nMean : %.2lf\nMedian : %.2lf\n", i + 1, mean, median);
+        double median = 0;
+        if(size % 2 == 0) {
+            median = (arr[((size + 1) / 2) - 1] + arr[((size + 1) / 2)]) / 2.00;
+        } else {
+            median = arr[((size + 1) / 2) - 1];
+        }
+        printf("Case #%d:\nMean : %.2lf\nMedian : %.2lf\n", i + 1, (mean / size), median);
     }
     return 0;
 }
+// 4
+// 1 2 3 5
+// 0 1 2 3
+// 4 / 2 = 2 - 1 = idx1
+// 4 / 2 = 2 = idx2
 
 // 2
 // 5
