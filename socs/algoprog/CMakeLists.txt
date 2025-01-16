@@ -209,3 +209,10 @@ add_executable(searching-simple-party-finding searching/simple-party-finding.c)
 add_executable(searching-an-easy-problem searching/an-easy-problem.c)
 add_executable(searching-bibi-and-bananas searching/bibi-and-bananas.c)
 add_executable(searching-jojo-and-mmorpg searching/jojo-and-mmorpg.c)
+
+# binary search executable
+add_executable(binary-search-position binary-search/position.c)
+add_executable(binary-search-binary-search binary-search/binary-search.c)
+add_executable(binary-search-as-close-as-you-can binary-search/as-close-as-you-can.c)
+add_executable(binary-search-maximum-addition binary-search/maximum-addition.c)
+add_executable(binary-search-another-maximum-addition-again binary-search/another-maximum-addition-again.c)
