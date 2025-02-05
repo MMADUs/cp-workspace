@@ -74,20 +74,36 @@ struct node* get(struct node *head, const int k) {
     return NULL;
 }
 
-void delete(struct node *head, const int k) {
-    // set the current nod head
-    struct node *current = head;
-    // find & delete by key
-    while(current != NULL) {
+void update(struct node **head, const int k, const char newValue[]) {
+    struct node *current = *head;
+    while (current != NULL) {
         if (current -> key == k) {
-            struct node *del = current;
-            current = current -> next;
-            free(del);
+            strcpy(current -> value, newValue);
             return;
-        } else {
-            current = current -> next;
         }
+        current = current -> next;
     }
+}
+
+void delete(struct node **head, const int k) {
+    struct node *current = *head;
+    struct node *prev = NULL;
+    // search to delete
+    while (current != NULL && current -> key != k) {
+        prev = current;
+        current = current -> next;
+    }
+    if (current == NULL) {
+        // key not found
+        return;
+    }
+    // if prev is empty, delete head
+    if (prev == NULL) {
+        *head = current -> next;
+    } else {
+        prev -> next = current -> next;
+    }
+    free(current);
 }
 
 void printNode(struct node *head) {
@@ -110,6 +126,8 @@ int main() {
     if (found != NULL) {
         printf("found with key: %d value: %s\n", found -> key, found -> value);
     }
+    // update
+    update(&head, 1, "hellos");
     // delete
     delete(&head, 2);
     struct node *deleted = get(head, 2);
