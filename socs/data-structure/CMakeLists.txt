@@ -6,3 +6,5 @@ set(CMAKE_C_STANDARD 11)
 # practice executable
 add_executable(practice-single-linked-list practice/single-linked-list.c)
 add_executable(practice-double-linked-list practice/double-linked-list.c)
+add_executable(practice-queue practice/queue.c)
+add_executable(practice-stack practice/stack.c)
