@@ -1,143 +1,95 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-struct node {
+typedef struct node {
     int key;
-    char value[20];
     struct node *next;
-};
+}node;
 
-void insert(struct node **head, const int k, const char v[]) {
-    // the casting '(struct node*)' is only required in CPP
-    // because malloc returns void, so casting is mandatory for its type
-    // eg: (struct node*)malloc(sizeof(struct node));
-    struct node *newNode = malloc(sizeof(struct node));
-    newNode -> key = k;
-    strcpy(newNode -> value, v);
-    newNode -> next = *head;
-    *head = newNode;
+typedef struct single_linked_list {
+    node *head;
+}SLL;
+
+SLL *newSLL() {
+    SLL *newSLL = (SLL *)malloc(sizeof(SLL));
+    newSLL->head = NULL;
+    return newSLL;
 }
 
-void insertAt(struct node **head, const int position, const int k, const char v[]) {
-    // if at start position (0)
-    if(position == 0) {
-        insert(head, k, v);
-        return;
-    }
-    // set head based on position
-    struct node *current = *head;
-    for (int i = 0; i < position - 1 && current != NULL; i++) {
-        current = current -> next;
-    }
-    if(current == NULL) {
-        // position out of bounds
-        return;
-    }
-    // insert the new node
-    struct node *newNode = malloc(sizeof(struct node));
-    newNode -> key = k;
-    strcpy(newNode -> value, v);
-    newNode -> next = current -> next;
-    current -> next = newNode;
+node *newNode(const int key) {
+    node *newNode = (node *)malloc(sizeof(node));
+    newNode->key = key;
+    newNode->next = NULL;
+    return newNode;
 }
 
-void insertAtEnd(struct node **head, const int k, const char v[]) {
-    struct node *newNode = malloc(sizeof(struct node));
-    newNode -> key = k;
-    strcpy(newNode -> value, v);
-    newNode -> next = NULL;
-    // if list is empty, new node becomes head
-    if (*head == NULL) {
-        *head = newNode;
-        return;
-    }
-    // otherwise find the last node
-    struct node *current = *head;
-    while (current -> next != NULL) {
-        current = current -> next;
-    }
-    // insert the new node after the last node
-    current -> next = newNode;
-}
-
-struct node* get(struct node *head, const int k) {
-    // set the current head
-    struct node* current = head;
-    // search linearly
-    while (current != NULL) {
-        if (current -> key == k) {
-            return current;
-        }
-        current = current -> next;
-    }
-    return NULL;
-}
-
-void update(struct node **head, const int k, const char newValue[]) {
-    struct node *current = *head;
-    while (current != NULL) {
-        if (current -> key == k) {
-            strcpy(current -> value, newValue);
-            return;
-        }
-        current = current -> next;
-    }
-}
-
-void delete(struct node **head, const int k) {
-    struct node *current = *head;
-    struct node *prev = NULL;
-    // search to delete
-    while (current != NULL && current -> key != k) {
-        prev = current;
-        current = current -> next;
-    }
-    if (current == NULL) {
-        // key not found
-        return;
-    }
-    // if prev is empty, delete head
-    if (prev == NULL) {
-        *head = current -> next;
+void pushf(SLL *list, const int key) {
+    node *n = newNode(key);
+    if(list->head == NULL) {
+        list->head = n;
     } else {
-        prev -> next = current -> next;
+        n->next = list->head;
+        list->head = n;
     }
-    free(current);
 }
 
-void printNode(struct node *head) {
-    struct node *current = head;
-    while (current != NULL) {
-        printf("key: %d value: %s\n", current -> key, current -> value);
-        current = current -> next;
+void pushb(const SLL *list, const int key) {
+    node *n = newNode(key);
+    node *curr = list->head;
+    while(curr->next != NULL) {
+        curr = curr->next;
+    }
+    curr->next = n;
+}
+
+void push_asc(SLL *list, const int key) {
+    node *n = newNode(key);
+    if(list -> head == NULL || key < list -> head->key) {
+        n->next = list->head;
+        list->head = n;
+        return;
+    }
+    node *curr = list->head;
+    while(curr->next != NULL && key < curr->next->key) {
+        curr = curr->next;
+    }
+    n->next = curr->next;
+    curr->next = n;
+}
+
+void pop(SLL *list, const int k) {
+    node *curr = list -> head;
+    node *prev = NULL;
+    while (curr != NULL && curr -> key != k) {
+        prev = curr;
+        curr = curr -> next;
+    }
+    if (curr == NULL) {
+        printf("deleting element key: %d not found", k);
+        return;
+    }
+    if (prev == NULL) {
+        list -> head = curr -> next;
+    } else {
+        prev -> next = curr -> next;
+    }
+    free(curr);
+}
+
+void display(const SLL *list) {
+    const node *curr = list -> head;
+    while (curr != NULL) {
+        printf("%d\n", curr -> key);
+        curr = curr -> next;
     }
 }
 
 int main() {
-    // init first empty head
-    struct node *head = NULL;
-    // insert
-    insert(&head, 1, "hello");
-    insert(&head, 2, "world");
-    insert(&head, 3, "nizwa");
-    // get
-    struct node *found = get(head, 2);
-    if (found != NULL) {
-        printf("found with key: %d value: %s\n", found -> key, found -> value);
-    }
-    // update
-    update(&head, 1, "hellos");
-    // delete
-    delete(&head, 2);
-    struct node *deleted = get(head, 2);
-    if (deleted != NULL) {
-        printf("found with key: %d value: %s\n", deleted -> key, deleted -> value);
-    }
-    // insert on position
-    insertAt(&head, 1, 7, "this is middle");
-    insertAtEnd(&head, 10, "the end");
-    // print all
-    printNode(head);
+    SLL *list = newSLL();
+    pushf(list, 1);
+    pushf(list, 2);
+    pushb(list, 3);
+    pop(list, 2);
+    display(list);
     return 0;
 }

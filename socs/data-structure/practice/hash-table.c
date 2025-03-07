@@ -1,146 +1,111 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 
-#define SIZE 26
+#define T_SIZE 27 // alphabet
 
-typedef struct Node {
-    char data[100];
-    struct Node *next;
-    struct Node *prev;
-} Node;
+typedef struct node {
+    char name[50];
+    struct node *next;
+}node;
 
-typedef struct HashTable {
-    Node *heads[SIZE];
-    Node *tails[SIZE];
-} HashTable;
+typedef struct hash_table {
+    node *tables[T_SIZE];
+}HT;
 
-// new hash table
-HashTable* newHashTable() {
-    HashTable* table = (HashTable*)malloc(sizeof(HashTable));
-    for (int i = 0; i < SIZE; i++) {
-        table->heads[i] = NULL;
-        table->tails[i] = NULL;
+HT *new_hash_table() {
+    HT *h = (HT *)malloc(sizeof(HT));
+    for(int i = 0; i < T_SIZE; i++) {
+        h->tables[i] = NULL;
     }
-    return table;
+    return h;
 }
 
-// hash index
+node *newNode(const char *name) {
+    node *n = (node *)malloc(sizeof(node));
+    strcpy(n->name, name);
+    n->next = NULL;
+    return n;
+}
+
 int hash(const char *data) {
     if (data[0] >= 'A' && data[0] <= 'Z') {
-        return (data[0] - 'A') % SIZE;
-    } else if (data[0] >= 'a' && data[0] <= 'z') {
-        return (data[0] - 'a') % SIZE;
+        return (data[0] - 'A') % T_SIZE;
     }
-    return 0; // default value
-}
-
-// create a new node
-Node* newNode(const char *data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    strcpy(newNode->data, data);
-    newNode->next = NULL;
-    newNode->prev = NULL;
-    return newNode;
-}
-
-// Insert function
-void insert(HashTable* table, const char *data) {
-    Node* temp = newNode(data);
-    const int index = hash(data);
-
-    if (table->heads[index] == NULL) {
-        // Empty bucket
-        table->heads[index] = table->tails[index] = temp;
-    } else {
-        // Insert in sorted order
-        if (strcmp(table->heads[index]->data, temp->data) >= 0) {
-            // Insert at head
-            temp->next = table->heads[index];
-            table->heads[index]->prev = temp;
-            table->heads[index] = temp;
-        } else if (strcmp(table->tails[index]->data, temp->data) <= 0) {
-            // Insert at tail
-            temp->prev = table->tails[index];
-            table->tails[index]->next = temp;
-            table->tails[index] = temp;
-        } else {
-            // Insert in middle
-            Node* curr = table->heads[index];
-            while (curr != NULL && strcmp(curr->data, data) <= 0) {
-                curr = curr->next;
-            }
-            temp->prev = curr->prev;
-            temp->next = curr;
-            curr->prev->next = temp;
-            curr->prev = temp;
-        }
+    if (data[0] >= 'a' && data[0] <= 'z') {
+        return (data[0] - 'a') % T_SIZE;
     }
+    return 0;
 }
 
-// Delete function
-void delete(HashTable* table, const char *data) {
-    int index = hash(data);
-    if (table->heads[index] == NULL) {
+void insert(HT *ht, const char *name) {
+    node *n = newNode(name);
+    const int index = hash(name);
+    node *curr = ht->tables[index];
+    if(curr == NULL) {
+        ht->tables[index] = n;
         return;
     }
-    if (strcmp(table->heads[index]->data, data) == 0) {
-        // Delete from head
-        Node* temp = table->heads[index];
-        table->heads[index] = temp->next;
+    if(strcmp(curr->name, name) > 0) {
+        n->next = ht->tables[index];
+        ht->tables[index] = n;
+        return;
+    }
+    while(curr->next != NULL && strcmp(curr->next->name, name) < 0) {
+        curr = curr->next;
+    }
+    n->next = curr->next;
+    curr->next = n;
+}
 
-        if (table->heads[index] == NULL) {
-            table->tails[index] = NULL;
-        } else {
-            table->heads[index]->prev = NULL;
+void delete(HT *ht, const char *name) {
+    const int index = hash(name);
+    node *curr = ht->tables[index];
+    if(curr == NULL) {
+        printf("No data on specified hashed table\n");
+        return;
+    }
+    if(strcmp(curr->name, name) == 0) {
+        ht->tables[index] = curr->next;
+        printf("deleting: %s\n", curr->name);
+        free(curr);
+        return;
+    }
+    while(curr->next != NULL) {
+        if(strcmp(curr->next->name, name) == 0) {
+            node *temp = curr->next;
+            curr->next = temp->next;
+            free(temp);
+            return;
         }
-        free(temp);
-    } else if (strcmp(table->tails[index]->data, data) == 0) {
-        // Delete from tail
-        Node* temp = table->tails[index];
-        table->tails[index] = temp->prev;
-        table->tails[index]->next = NULL;
-        free(temp);
-    } else {
-        // Delete from middle
-        Node* curr = table->heads[index];
-        while (curr != NULL && strcmp(curr->data, data) != 0) {
+        curr = curr->next;
+    }
+    printf("Name not found: %s\n", name);
+}
+
+void display(const HT *ht) {
+    for(int i = 0; i < T_SIZE; i++) {
+        const char indexChar = (i < 26) ? ('A' + i) : '#';
+        printf("%c: ", indexChar);
+        node *curr = ht->tables[i];
+        while(curr != NULL) {
+            printf("%s -> ", curr->name);
             curr = curr->next;
         }
-        if (curr != NULL) {
-            curr->prev->next = curr->next;
-            curr->next->prev = curr->prev;
-            free(curr);
-        }
+        printf("NULL\n");
     }
 }
 
-// Print function
-void printTable(HashTable* table) {
-    for (int i = 0; i < SIZE; i++) {
-        printf("Index %d: ", i);
-
-        if (table->heads[i] == NULL) {
-            printf("-\n");
-        } else {
-            Node* curr = table->heads[i];
-            while (curr != NULL) {
-                printf("%s -> ", curr->data);
-                curr = curr->next;
-            }
-            printf("NULL\n");
-        }
-    }
-}
-
-// Example usage
 int main() {
-    HashTable* table = newHashTable();
-    insert(table, "Andre");
-    insert(table, "Andri");
-    insert(table, "Andro");
-    insert(table, "Budi");
-    delete(table, "Andro");
-    printTable(table);
+    HT *ht = new_hash_table();
+    insert(ht, "Andi");
+    insert(ht, "Ando");
+    insert(ht, "Ande");
+    insert(ht, "Budi");
+    insert(ht, "Nizwa");
+    display(ht);
+    delete(ht, "Andi");
+    display(ht);
+    free(ht);
     return 0;
 }
