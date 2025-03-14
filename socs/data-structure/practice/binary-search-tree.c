@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct node {
+typedef struct tree_node {
     int key;
     char value[50];
-    struct node *left;
-    struct node *right;
-}node;
+    struct tree_node *left;
+    struct tree_node *right;
+} node;
 
 typedef struct binary_search_tree {
     node *root;
-}BST;
+} BST;
 
 BST *newBST() {
     BST *tree = (BST *)malloc(sizeof(BST));
@@ -28,92 +28,114 @@ node *newNode(const int key, const char *value) {
     return n;
 }
 
-node *insertNode(node *tree, const int key, char *value) {
-    if (tree == NULL) {
+node *insertNode(node *root, const int key, char *value) {
+    if (root == NULL) {
         return newNode(key, value);
     }
-    if (key < tree->key) {
-        tree->left = insertNode(tree->left, key, value);
-    } else if (key > tree->key) {
-        tree->right = insertNode(tree->right, key, value);
+    if (key < root->key) {
+        root->left = insertNode(root->left, key, value);
+    } else if (key > root->key) {
+        root->right = insertNode(root->right, key, value);
     } else {
-        strcpy(tree->value, value);
+        strcpy(root->value, value);
     }
-    return tree;
+    return root;
 }
 
-void insert(BST *bst, const int key, char *value) {
-    if (bst != NULL) {
-        bst->root = insertNode(bst->root, key, value);
+void push(BST *tree, const int key, char *value) {
+    if (tree != NULL) {
+        tree->root = insertNode(tree->root, key, value);
     }
 }
 
-node* deleteNode(node* tree, const int key) {
-    if (tree == NULL) {
-        printf("tree is empty\n");
+node *successor(const node *root) {
+    node *curr = root->right;
+    while (curr->left != NULL) {
+        curr = curr->left;
+    }
+    return curr;
+}
+
+node *predecessor(const node *root) {
+    node *curr = root->left;
+    while (curr->right != NULL) {
+        curr = curr->right;
+    }
+    return curr;
+}
+
+node* deleteNode(node* root, const int key) {
+    if (root == NULL) {
+        printf("root is empty\n");
         return NULL;
     }
-    if(key < tree -> key) {
-        tree -> left = deleteNode(tree -> left, key);
-    } else if(key > tree -> key) {
-        tree -> right = deleteNode(tree -> right, key);
+    if(key < root -> key) {
+        root -> left = deleteNode(root -> left, key);
+    } else if(key > root -> key) {
+        root -> right = deleteNode(root -> right, key);
     } else {
-        if(tree -> left == NULL && tree -> right == NULL) {
-            free(tree);
-            tree = NULL;
-        } else if(tree -> left == NULL || tree -> right == NULL) {
+        if(root -> left == NULL && root -> right == NULL) {
+            free(root);
+            root = NULL;
+        } else if(root -> left == NULL || root -> right == NULL) {
             node *temp;
-            if(tree -> left == NULL) {
-                temp = tree -> right;
+            if(root -> left == NULL) {
+                temp = root -> right;
             } else {
-                temp = tree -> left;
+                temp = root -> left;
             }
-            *tree = *temp;
+            *root = *temp;
             free(temp);
         } else {
-            node *temp = tree -> left;
-            while(temp -> right != NULL) {
-                temp = temp -> right;
-            }
-            tree -> key = temp -> key;
-            strcpy(tree -> value, temp -> value);
-            tree -> left = deleteNode(tree -> left, temp -> key);
+            // const node *curr = successor(root);
+            const node *curr = predecessor(root);
+            root -> key = curr -> key;
+            strcpy(root -> value, curr -> value);
+            root -> left = deleteNode(root -> left, curr -> key);
         }
     }
-    return tree;
+    return root;
 }
 
-void delete(BST *bst, const int key) {
-    if (bst != NULL) {
-        bst->root = deleteNode(bst->root, key);
-    }
-}
-
-void printOrdered(node* tree) {
+void pop(BST *tree, const int key) {
     if (tree != NULL) {
-        printOrdered(tree->left);
-        printf("key: %d value: %s\n", tree->key, tree->value);
-        printOrdered(tree->right);
+        tree->root = deleteNode(tree->root, key);
     }
 }
 
-void display(const BST* tree) {
-    if (tree == NULL) {
-        printf("Tree is empty\n");
-        return;
+void prefix(node* root) {
+    if (root != NULL) {
+        printf("key: %d value: %s\n", root->key, root->value);
+        prefix(root->left);
+        prefix(root->right);
     }
-    printOrdered(tree->root);
+}
+
+void infix(node* root) {
+    if (root != NULL) {
+        infix(root->left);
+        printf("key: %d value: %s\n", root->key, root->value);
+        infix(root->right);
+    }
+}
+
+void postfix(node* root) {
+    if (root != NULL) {
+        postfix(root->left);
+        postfix(root->right);
+        printf("key: %d value: %s\n", root->key, root->value);
+    }
 }
 
 int main() {
     BST *tree = newBST();
-    insert(tree, 1, "hello");
-    insert(tree, 2, "world");
-    insert(tree, 3, "hello");
-    insert(tree, 4, "hello");
-    insert(tree, 5, "hello");
-    delete(tree, 4);
-    display(tree);
+    push(tree, 1, "hello");
+    push(tree, 2, "world");
+    push(tree, 3, "hello");
+    push(tree, 4, "hello");
+    push(tree, 5, "hello");
+    pop(tree, 4);
+    infix(tree->root);
     free(tree);
     return 0;
 }
